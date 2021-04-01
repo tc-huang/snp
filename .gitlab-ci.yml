@@ -20,7 +20,7 @@ clang_format:
         - docker-docker
     variables:
         ROS_DISTRO: melodic
-        CLANG_FORMAT_VERSION: "3.9"
+        CLANG_FORMAT_VERSION: "8"
         CLANG_FORMAT_CHECK: "file"
     script:
         - .industrial_ci/gitlab.sh
