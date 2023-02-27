@@ -19,6 +19,7 @@ clang_format:
     tags:
         - docker-docker
     allow_failure: false
+    image: ubuntu:20.04
     before_script:
         - apt update && apt -y install git clang-format
     script:
@@ -33,6 +34,7 @@ cmake_format:
     tags:
         - docker-docker
     allow_failure: false
+    image: ubuntu:20.04
     before_script:
         - apt update && apt -y install git python3-pip
     script:
