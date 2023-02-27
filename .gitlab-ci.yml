@@ -2,13 +2,15 @@ image: docker:git
 variables:
     DOCKER_HOST: tcp://docker:2375/
     DOCKER_DRIVER: overlay2
+    MERGE_REQUEST_RULE: $CI_PIPELINE_SOURCE == "merge_request_event"
+    POST_MERGE_RULE: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_COMMIT_TITLE =~ /Merge branch.*/
 
 services:
     - docker:dind
 
 before_script:
     - apk update && apk add --no-cache wget git openssh-client bash coreutils tar openssh
-    - git clone --quiet --depth 1 https://github.com/ros-industrial/industrial_ci .industrial_ci
+    - git clone --quiet --depth 1 https://github.com/ros-industrial/industrial_ci .industrial_ci -b master
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
 
 stages:
@@ -18,15 +20,32 @@ clang_format:
     stage: all
     tags:
         - docker-docker
-    variables:
-        ROS_DISTRO: melodic
-        CLANG_FORMAT_VERSION: "8"
-        CLANG_FORMAT_CHECK: "file"
+    allow_failure: false
+    image: ubuntu:20.04
+    before_script:
+        - apt update && apt -y install git clang-format
     script:
-        - .industrial_ci/gitlab.sh
-    only:
-        - merge_requests
-        - master
+        - ./.run-clang-format && output=$(git diff)
+        - if [ -n "$output" ]; then echo $output && exit 1; else exit 0; fi
+    rules:
+        - if: $MERGE_REQUEST_RULE
+        - if: $POST_MERGE_RULE
+
+cmake_format:
+    stage: all
+    tags:
+        - docker-docker
+    allow_failure: false
+    image: ubuntu:20.04
+    before_script:
+        - apt update && apt -y install git python3-pip
+    script:
+        - pip3 install cmakelang
+        - ./.run-cmake-format && output=$(git diff)
+        - if [ -n "$output" ]; then echo $output && exit 1; else exit 0; fi
+    rules:
+        - if: $MERGE_REQUEST_RULE
+        - if: $POST_MERGE_RULE
 
 melodic:
     stage: all
@@ -39,9 +58,9 @@ melodic:
         TMPDIR: '${CI_PROJECT_DIR}.tmp'
     script:
         - .industrial_ci/gitlab.sh
-    only:
-        - merge_requests
-        - master
+    rules:
+        - if: $MERGE_REQUEST_RULE
+        - if: $POST_MERGE_RULE
 
 noetic:
     stage: all
@@ -54,6 +73,6 @@ noetic:
         TMPDIR: '${CI_PROJECT_DIR}.tmp'
     script:
         - .industrial_ci/gitlab.sh
-    only:
-        - merge_requests
-        - master
+    rules:
+        - if: $MERGE_REQUEST_RULE
+        - if: $POST_MERGE_RULE
