@@ -2,6 +2,8 @@ image: docker:git
 variables:
     DOCKER_HOST: tcp://docker:2375/
     DOCKER_DRIVER: overlay2
+    MERGE_REQUEST_RULE: $CI_PIPELINE_SOURCE == "merge_request_event"
+    POST_MERGE_RULE: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_COMMIT_TITLE =~ /Merge branch.*/
 
 services:
     - docker:dind
@@ -26,8 +28,8 @@ clang_format:
         - ./.run-clang-format && output=$(git diff)
         - if [ -n "$output" ]; then echo $output && exit 1; else exit 0; fi
     rules:
-        - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-        - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_COMMIT_TITLE =~ /Merge branch.*/
+        - if: $MERGE_REQUEST_RULE
+        - if: $POST_MERGE_RULE
 
 cmake_format:
     stage: all
@@ -42,8 +44,8 @@ cmake_format:
         - ./.run-cmake-format && output=$(git diff)
         - if [ -n "$output" ]; then echo $output && exit 1; else exit 0; fi
     rules:
-        - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-        - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_COMMIT_TITLE =~ /Merge branch.*/
+        - if: $MERGE_REQUEST_RULE
+        - if: $POST_MERGE_RULE
 
 melodic:
     stage: all
@@ -57,8 +59,8 @@ melodic:
     script:
         - .industrial_ci/gitlab.sh
     rules:
-        - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-        - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_COMMIT_TITLE =~ /Merge branch.*/
+        - if: $MERGE_REQUEST_RULE
+        - if: $POST_MERGE_RULE
 
 noetic:
     stage: all
@@ -72,5 +74,5 @@ noetic:
     script:
         - .industrial_ci/gitlab.sh
     rules:
-        - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-        - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_COMMIT_TITLE =~ /Merge branch.*/
+        - if: $MERGE_REQUEST_RULE
+        - if: $POST_MERGE_RULE
