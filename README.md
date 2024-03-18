@@ -1,4 +1,4 @@
-# SNP Implementation at Automate 2022
+# SNP Implementation at Automate 2023
 
 This demo uses a Motoman HC10 mounted on a table with an Intel RealSense camera to reconstruct the surface of an arbitrary part and generate motion plans for polishing the part in a raster pattern
 
