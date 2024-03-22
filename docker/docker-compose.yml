@@ -36,4 +36,17 @@ services:
     #         - driver: nvidia
     #           count: 1
     #           capabilities: [gpu]
+  # Driver
+  micro-ros-agent:
+    environment:
+      ROS_LOG_DIR: /tmp
+      ROS_LOCALHOST_ONLY: $ROS_LOCALHOST_ONLY
+      ROS_DOMAIN_ID: $ROS_DOMAIN_ID
+    container_name: micro-ros-agent
+    image: microros/micro-ros-agent:humble
+    command: udp4 --port 8888
+    stdin_open: true
+    tty: true
+    privileged: true
+    network_mode: host
   
