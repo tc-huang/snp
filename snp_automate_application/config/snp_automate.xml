@@ -23,25 +23,31 @@
   </BehaviorTree>
 
   <BehaviorTree ID="motion">
-    <Sequence>
-      <TriggerService name="Enable Robot"
-                      service_name="robot_enable"/>
-      <UpdateTrajectoryStartState name="Update Trajectory Start State"
-                                  topic_name="/joint_states"
-                                  input="{approach}"
-                                  output="{updated_approach}"/>
-      <FollowJointTrajectoryAction name="Execute Approach Motion"
-                                   action_name="{follow_joint_trajectory_action}"
-                                   trajectory="{updated_approach}"/>
-      <FollowJointTrajectoryAction name="Execute Process Motion"
-                                   action_name="{follow_joint_trajectory_action}"
-                                   trajectory="{process}"/>
-      <FollowJointTrajectoryAction name="Execute Departure Motion"
-                                   action_name="{follow_joint_trajectory_action}"
-                                   trajectory="{departure}"/>
-      <TriggerService name="Disable Robot"
-                      service_name="robot_disable"/>
-    </Sequence>
+    <Fallback>
+      <Sequence>
+        <StartPointQueueMode name="Enable Robot"
+                             service_name="start_point_queue_mode"/>
+        <UpdateTrajectoryStartState name="Update Trajectory Start State"
+                                    topic_name="/joint_states"
+                                    input="{approach}"
+                                    output="{updated_approach}"/>
+        <FollowJointTrajectoryAction name="Execute Approach Motion"
+                                     action_name="{follow_joint_trajectory_action}"
+                                     trajectory="{updated_approach}"/>
+        <FollowJointTrajectoryAction name="Execute Process Motion"
+                                     action_name="{follow_joint_trajectory_action}"
+                                     trajectory="{process}"/>
+        <FollowJointTrajectoryAction name="Execute Departure Motion"
+                                     action_name="{follow_joint_trajectory_action}"
+                                     trajectory="{departure}"/>
+        <TriggerService name="Disable Robot"
+                        service_name="stop_traj_mode"/>
+      </Sequence>
+      <ForceFailure>
+        <TriggerService name="Disable Robot"
+                        service_name="stop_traj_mode"/>
+      </ForceFailure>
+    </Fallback>
   </BehaviorTree>
 
   <BehaviorTree ID="process">
@@ -148,29 +154,35 @@
   </BehaviorTree>
 
   <BehaviorTree ID="scan">
-    <Sequence>
-      <TriggerService name="Enable Robot"
-                      service_name="robot_enable"/>
-      <UpdateTrajectoryStartState name="Update Trajectory Start State"
-                                  topic_name="/joint_states"
-                                  input="{approach}"
-                                  output="{updated_approach}"/>
-      <FollowJointTrajectoryAction name="Execute Scan Approach Motion"
-                                   action_name="{follow_joint_trajectory_action}"
-                                   trajectory="{updated_approach}"/>
-      <StartReconstructionService name="Start Reconstruction"
-                                  service_name="start_reconstruction"/>
-      <FollowJointTrajectoryAction name="Execute Scan Motion"
-                                   action_name="{follow_joint_trajectory_action}"
-                                   trajectory="{process}"/>
-      <StopReconstructionService name="Stop Reconstruction"
-                                 service_name="stop_reconstruction"/>
-      <FollowJointTrajectoryAction name="Execute Scan Departure Motion"
-                                   action_name="{follow_joint_trajectory_action}"
-                                   trajectory="{departure}"/>
-      <TriggerService name="Disable Robot"
-                      service_name="robot_disable"/>
-    </Sequence>
+    <Fallback>
+      <Sequence>
+        <UpdateTrajectoryStartState name="Update Trajectory Start State"
+                                    topic_name="/joint_states"
+                                    input="{approach}"
+                                    output="{updated_approach}"/>
+        <StartPointQueueMode name="Enable Robot"
+                             service_name="start_point_queue_mode"/>
+        <FollowJointTrajectoryAction name="Execute Scan Approach Motion"
+                                     action_name="{follow_joint_trajectory_action}"
+                                     trajectory="{updated_approach}"/>
+        <StartReconstructionService name="Start Reconstruction"
+                                    service_name="start_reconstruction"/>
+        <FollowJointTrajectoryAction name="Execute Scan Motion"
+                                     action_name="{follow_joint_trajectory_action}"
+                                     trajectory="{process}"/>
+        <StopReconstructionService name="Stop Reconstruction"
+                                   service_name="stop_reconstruction"/>
+        <FollowJointTrajectoryAction name="Execute Scan Departure Motion"
+                                     action_name="{follow_joint_trajectory_action}"
+                                     trajectory="{departure}"/>
+        <TriggerService name="Disable Robot"
+                        service_name="stop_traj_mode"/>
+      </Sequence>
+      <ForceFailure>
+        <TriggerService name="Disable Robot"
+                        service_name="stop_traj_mode"/>
+      </ForceFailure>
+    </Fallback>
   </BehaviorTree>
 
   <!-- Description of Node Models (used by Groot) -->
@@ -248,6 +260,11 @@
       <input_port name="index"
                   default="0"/>
     </Decorator>
+    <Action ID="StartPointQueueMode"
+            editable="true">
+      <input_port name="service_name"
+                  default="start_point_queue_mode"/>
+    </Action>
     <Action ID="StartReconstructionService"
             editable="true">
       <input_port name="service_name"

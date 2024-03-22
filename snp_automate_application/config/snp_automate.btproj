@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root BTCPP_format="4" project_name="Project">
-    <include path="snp.xml"/>
+    <include path="snp_automate.xml"/>
     <!-- Description of Node Models (used by Groot) -->
     <TreeNodesModel>
         <Action ID="ButtonApproval" editable="true">
@@ -52,6 +52,9 @@
         <Decorator ID="SetPage" editable="true">
             <input_port name="index" default="0"/>
         </Decorator>
+        <Action ID="StartPointQueueMode" editable="true">
+            <input_port name="service_name" default="start_point_queue_mode"/>
+        </Action>
         <Action ID="StartReconstructionService" editable="true">
             <input_port name="service_name" default="start_reconstruction"/>
         </Action>
