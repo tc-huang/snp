@@ -31,9 +31,10 @@
   </include>
 
   <node pkg="rviz2" exec="rviz2" args="-d $(find-pkg-share snp_automate_2023)/config/app.rviz" output="screen">
-    <param name="bt_files" value="[$(find-pkg-share snp_application)/config/snp.xml]"/>
+    <param name="bt_files" value="[$(find-pkg-share snp_automate_application)/config/snp_automate.xml]"/>
     <param name="tree" value="main"/>
     <!-- Application -->
+    <param name="bt_short_timeout" value="15"/>
     <param name="config_file" value="$(find-pkg-share snp_automate_2023)/config/tpp.yaml"/>
     <param name="mesh_file" value="/tmp/results_mesh.ply"/>
     <param name="motion_group" value="manipulator"/>
@@ -94,10 +95,10 @@
   </node>
 
   <group unless="$(var sim_robot)">
-    <!-- [[Motoman Driver Goes Here]] -->
+    <node pkg="motoros2_fjt_pt_queue_proxy" exec="server" name="fjt_proxy"/>
   </group>
   <group if="$(var sim_robot)">
-    <node pkg="snp_motion_execution" exec="robot_enable_simulator" />
+    <node pkg="snp_automate_application" exec="motoros2_simulator.py"/>
     <group if="$(var bypass_execution)">
       <node pkg="snp_motion_execution" exec="execution_simulator" >
         <param name="follow_joint_trajectory_action" value="$(var follow_joint_trajectory_action)"/>
