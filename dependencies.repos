@@ -12,5 +12,5 @@
     version: ros2_msgs_only
 - git:
     local-name: motoros2_fjt_pt_queue_proxy
-    uri: https://github.com/gavanderhoorn/motoros2_fjt_pt_queue_proxy.git
-    version: c824d1a5d8e70bb125160470dbe22f33894c197e
+    uri: https://github.com/Yolnan/motoros2_fjt_pt_queue_proxy.git
+    version: 8a8cfaf813644dd26c892b73e78cecb46b3a8cf4
