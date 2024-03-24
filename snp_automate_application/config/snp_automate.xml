@@ -40,8 +40,12 @@
         <FollowJointTrajectoryAction name="Execute Departure Motion"
                                      action_name="{follow_joint_trajectory_action}"
                                      trajectory="{departure}"/>
-        <TriggerService name="Disable Robot"
-                        service_name="stop_traj_mode"/>
+        <Fallback>
+          <TriggerService name="Disable Robot"
+                          service_name="stop_traj_mode"/>
+          <TriggerService name="Disable Robot"
+                          service_name="stop_traj_mode"/>
+        </Fallback>
       </Sequence>
       <ForceFailure>
         <TriggerService name="Disable Robot"
@@ -175,8 +179,12 @@
         <FollowJointTrajectoryAction name="Execute Scan Departure Motion"
                                      action_name="{follow_joint_trajectory_action}"
                                      trajectory="{departure}"/>
-        <TriggerService name="Disable Robot"
-                        service_name="stop_traj_mode"/>
+        <Fallback>
+          <TriggerService name="Disable Robot"
+                          service_name="stop_traj_mode"/>
+          <TriggerService name="Disable Robot"
+                          service_name="stop_traj_mode"/>
+        </Fallback>
       </Sequence>
       <ForceFailure>
         <TriggerService name="Disable Robot"
