@@ -44,13 +44,13 @@
     <param name="robot_description_semantic" value="$(var robot_description_semantic)"/>
     <param name="follow_joint_trajectory_action" value="$(var follow_joint_trajectory_action)"/>
     <!-- Industrial Reconstruction parameters -->
-    <param name="ir.tsdf.min.x" value="-0.9144"/>
-    <param name="ir.tsdf.min.y" value="-0.6096"/>
+    <param name="ir.tsdf.min.x" value="0.21"/>
+    <param name="ir.tsdf.min.y" value="-0.45"/>
     <param name="ir.tsdf.min.z" value="0.075"/>
-    <param name="ir.tsdf.max.x" value="0.9144"/>
-    <param name="ir.tsdf.max.y" value="0.6096"/>
-    <param name="ir.tsdf.max.z" value="1.0"/>
-    <param name="ir.tsdf.voxel_length" value="0.007"/>
+    <param name="ir.tsdf.max.x" value="1.5"/>
+    <param name="ir.tsdf.max.y" value="0.45"/>
+    <param name="ir.tsdf.max.z" value="0.527"/>
+    <param name="ir.tsdf.voxel_length" value="0.003"/>
     <param name="ir.tsdf.sdf_trunc" value="0.015"/>
     <param name="ir.rgbd.depth_scale" value="1000.0"/>
     <param name="ir.rgbd.depth_trunc" value="0.9"/>
