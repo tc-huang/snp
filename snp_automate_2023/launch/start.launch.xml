@@ -104,7 +104,7 @@
   <group unless="$(var sim_robot)">
     <node pkg="motoros2_fjt_pt_queue_proxy" exec="server" name="fjt_proxy">
       <param name="max_retries" value="200"/>
-      <param name="busy_wait_time" value ="0.5"/>
+      <param name="busy_wait_time" value ="0.1"/>
       <param name="convergence_threshold" value="0.01"/>
     </node>
   </group>
