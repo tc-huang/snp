@@ -75,7 +75,7 @@
     <include file="$(find-pkg-share realsense2_camera)/launch/rs_launch.py">
       <arg name="align_depth.enable" value="true"/>
       <arg name="pointcloud.enable" value="true"/>
-      <arg name="rgb_camera.profile" value="640x360x30"/>
+      <arg name="rgb_camera.profile" value="848x480x30"/>
       <arg name="publish_tf" value="false"/>
     </include>
   </group>
