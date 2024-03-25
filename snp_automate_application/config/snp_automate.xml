@@ -43,8 +43,10 @@
         <Fallback>
           <TriggerService name="Disable Robot"
                           service_name="stop_traj_mode"/>
-          <TriggerService name="Disable Robot"
-                          service_name="stop_traj_mode"/>
+          <Delay delay_msec="5000">
+            <TriggerService name="Disable Robot"
+                            service_name="stop_traj_mode"/>
+          </Delay>
         </Fallback>
       </Sequence>
       <ForceFailure>
@@ -182,8 +184,10 @@
         <Fallback>
           <TriggerService name="Disable Robot"
                           service_name="stop_traj_mode"/>
-          <TriggerService name="Disable Robot"
-                          service_name="stop_traj_mode"/>
+          <Delay delay_msec="5000">
+            <TriggerService name="Disable Robot"
+                            service_name="stop_traj_mode"/>
+          </Delay>
         </Fallback>
       </Sequence>
       <ForceFailure>
