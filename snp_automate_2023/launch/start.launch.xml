@@ -46,16 +46,16 @@
     <!-- Industrial Reconstruction parameters -->
     <param name="ir.tsdf.min.x" value="0.21"/>
     <param name="ir.tsdf.min.y" value="-0.45"/>
-    <param name="ir.tsdf.min.z" value="0.075"/>
+    <param name="ir.tsdf.min.z" value="0.08"/>
     <param name="ir.tsdf.max.x" value="1.5"/>
     <param name="ir.tsdf.max.y" value="0.45"/>
     <param name="ir.tsdf.max.z" value="0.527"/>
-    <param name="ir.tsdf.voxel_length" value="0.007"/>
+    <param name="ir.tsdf.voxel_length" value="0.003"/>
     <param name="ir.tsdf.sdf_trunc" value="0.015"/>
     <param name="ir.rgbd.depth_scale" value="1000.0"/>
     <param name="ir.rgbd.depth_trunc" value="0.9"/>
     <param name="ir.live" value="true"/>
-    <param name="ir.min_faces" value="2000"/>
+    <param name="ir.min_faces" value="3000"/>
     <param name="ir.normal_angle_tol" value="85.0"/>
     <param name="ir.normal_x" value="0.0"/>
     <param name="ir.normal_y" value="0.0"/>
@@ -75,7 +75,7 @@
     <include file="$(find-pkg-share realsense2_camera)/launch/rs_launch.py">
       <arg name="align_depth.enable" value="true"/>
       <arg name="pointcloud.enable" value="true"/>
-      <arg name="rgb_camera.profile" value="848x480x30"/>
+      <arg name="rgb_camera.profile" value="640x480x30"/>
       <arg name="publish_tf" value="false"/>
     </include>
   </group>
@@ -95,6 +95,7 @@
     <arg name="verbose" value="$(var verbose)"/>
     <arg name="scan_disabled_contact_links" value="$(var scan_disabled_contact_links)"/>
     <arg name="scan_reduced_contact_links" value="$(var scan_reduced_contact_links)"/>
+
   </include>
 
   <node pkg="snp_scanning" exec="scan_motion_plan_from_file_node">
