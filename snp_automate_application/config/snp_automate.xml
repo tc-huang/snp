@@ -23,29 +23,23 @@
   </BehaviorTree>
 
   <BehaviorTree ID="motion">
-    <Fallback>
-      <Sequence>
-        <StartPointQueueMode name="Enable Robot"
-                             service_name="start_point_queue_mode"/>
-        <UpdateTrajectoryStartState name="Update Trajectory Start State"
-                                    topic_name="/joint_states"
-                                    input="{approach}"
-                                    output="{updated_approach}"/>
-        <FollowJointTrajectoryAction name="Execute Approach Motion"
-                                     action_name="{follow_joint_trajectory_action}"
-                                     trajectory="{updated_approach}"/>
-        <FollowJointTrajectoryAction name="Execute Process Motion"
-                                     action_name="{follow_joint_trajectory_action}"
-                                     trajectory="{process}"/>
-        <FollowJointTrajectoryAction name="Execute Departure Motion"
-                                     action_name="{follow_joint_trajectory_action}"
-                                     trajectory="{departure}"/>
-      </Sequence>
-      <ForceFailure>
-        <TriggerService name="Disable Robot"
-                        service_name="stop_traj_mode"/>
-      </ForceFailure>
-    </Fallback>
+    <Sequence>
+      <StartPointQueueMode name="Enable Robot"
+                           service_name="start_point_queue_mode"/>
+      <UpdateTrajectoryStartState name="Update Trajectory Start State"
+                                  topic_name="/joint_states"
+                                  input="{approach}"
+                                  output="{updated_approach}"/>
+      <FollowJointTrajectoryAction name="Execute Approach Motion"
+                                   action_name="{follow_joint_trajectory_action}"
+                                   trajectory="{updated_approach}"/>
+      <FollowJointTrajectoryAction name="Execute Process Motion"
+                                   action_name="{follow_joint_trajectory_action}"
+                                   trajectory="{process}"/>
+      <FollowJointTrajectoryAction name="Execute Departure Motion"
+                                   action_name="{follow_joint_trajectory_action}"
+                                   trajectory="{departure}"/>
+    </Sequence>
   </BehaviorTree>
 
   <BehaviorTree ID="process">
@@ -152,33 +146,27 @@
   </BehaviorTree>
 
   <BehaviorTree ID="scan">
-    <Fallback>
-      <Sequence>
-        <UpdateTrajectoryStartState name="Update Trajectory Start State"
-                                    topic_name="/joint_states"
-                                    input="{approach}"
-                                    output="{updated_approach}"/>
-        <StartPointQueueMode name="Enable Robot"
-                             service_name="start_point_queue_mode"/>
-        <FollowJointTrajectoryAction name="Execute Scan Approach Motion"
-                                     action_name="{follow_joint_trajectory_action}"
-                                     trajectory="{updated_approach}"/>
-        <StartReconstructionService name="Start Reconstruction"
-                                    service_name="start_reconstruction"/>
-        <FollowJointTrajectoryAction name="Execute Scan Motion"
-                                     action_name="{follow_joint_trajectory_action}"
-                                     trajectory="{process}"/>
-        <StopReconstructionService name="Stop Reconstruction"
-                                   service_name="stop_reconstruction"/>
-        <FollowJointTrajectoryAction name="Execute Scan Departure Motion"
-                                     action_name="{follow_joint_trajectory_action}"
-                                     trajectory="{departure}"/>
-      </Sequence>
-      <ForceFailure>
-        <TriggerService name="Disable Robot"
-                        service_name="stop_traj_mode"/>
-      </ForceFailure>
-    </Fallback>
+    <Sequence>
+      <UpdateTrajectoryStartState name="Update Trajectory Start State"
+                                  topic_name="/joint_states"
+                                  input="{approach}"
+                                  output="{updated_approach}"/>
+      <StartPointQueueMode name="Enable Robot"
+                           service_name="start_point_queue_mode"/>
+      <FollowJointTrajectoryAction name="Execute Scan Approach Motion"
+                                   action_name="{follow_joint_trajectory_action}"
+                                   trajectory="{updated_approach}"/>
+      <StartReconstructionService name="Start Reconstruction"
+                                  service_name="start_reconstruction"/>
+      <FollowJointTrajectoryAction name="Execute Scan Motion"
+                                   action_name="{follow_joint_trajectory_action}"
+                                   trajectory="{process}"/>
+      <StopReconstructionService name="Stop Reconstruction"
+                                 service_name="stop_reconstruction"/>
+      <FollowJointTrajectoryAction name="Execute Scan Departure Motion"
+                                   action_name="{follow_joint_trajectory_action}"
+                                   trajectory="{departure}"/>
+    </Sequence>
   </BehaviorTree>
 
   <!-- Description of Node Models (used by Groot) -->
@@ -277,10 +265,6 @@
                   default="tool_paths"/>
       <input_port name="tool_paths"
                   default="{tool_paths}"/>
-    </Action>
-    <Action ID="TriggerService"
-            editable="true">
-      <input_port name="service_name"/>
     </Action>
     <Action ID="UpdateTrajectoryStartState"
             editable="true">
