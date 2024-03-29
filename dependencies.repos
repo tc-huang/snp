@@ -13,4 +13,4 @@
 - git:
     local-name: motoros2_fjt_pt_queue_proxy
     uri: https://github.com/Yolnan/motoros2_fjt_pt_queue_proxy.git
-    version: 8a8cfaf813644dd26c892b73e78cecb46b3a8cf4
+    version: 784581b9c86aed8b7ec590c950822fea12fba48c
