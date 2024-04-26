@@ -20,19 +20,11 @@ find_package(motoros2_interfaces REQUIRED)
 find_package(rviz_common REQUIRED)
 find_package(pluginlib REQUIRED)
 
-add_library(
-  ${PROJECT_NAME}_widget SHARED
-  src/snp_automate_widget.cpp
-  src/bt/snp_automate_bt_ros_nodes.cpp
-)
-target_include_directories(
-  ${PROJECT_NAME}_widget PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
-                                "$<INSTALL_INTERFACE:include>")
+add_library(${PROJECT_NAME}_widget SHARED src/snp_automate_widget.cpp src/bt/snp_automate_bt_ros_nodes.cpp)
+target_include_directories(${PROJECT_NAME}_widget PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
+                                                         "$<INSTALL_INTERFACE:include>")
 target_link_libraries(${PROJECT_NAME}_widget Qt5::Widgets)
-ament_target_dependencies(
-  ${PROJECT_NAME}_widget
-  motoros2_interfaces
-  snp_application)
+ament_target_dependencies(${PROJECT_NAME}_widget motoros2_interfaces snp_application)
 
 add_library(${PROJECT_NAME}_panel SHARED src/snp_automate_panel.cpp)
 target_link_libraries(${PROJECT_NAME}_panel ${PROJECT_NAME}_widget)
@@ -55,6 +47,5 @@ ament_export_dependencies(
   snp_application
   motoros2_interfaces
   rviz_common
-  pluginlib
-)
+  pluginlib)
 ament_package()
