@@ -10,6 +10,11 @@
         <Condition ID="ButtonMonitor" editable="true">
             <input_port name="button"/>
         </Condition>
+        <Action ID="CombineTrajectories" editable="true">
+            <input_port name="first"/>
+            <input_port name="second"/>
+            <input_port name="output"/>
+        </Action>
         <Action ID="ExecuteMotionPlanService" editable="true">
             <input_port name="service_name" default="execute_motion_plan"/>
             <input_port name="motion_plan" default="{motion_plan}"/>
@@ -38,9 +43,7 @@
         </Action>
         <Action ID="MotionPlanPub" editable="true">
             <input_port name="topic_name"/>
-            <input_port name="approach" default="{approach}"/>
-            <input_port name="process" default="{process}"/>
-            <input_port name="departure" default="{departure}"/>
+            <input_port name="trajectory" default="{trajectory}"/>
         </Action>
         <Action ID="ProcessNode" editable="true"/>
         <Decorator ID="Progress" editable="true">
