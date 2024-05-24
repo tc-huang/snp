@@ -43,6 +43,10 @@
     <param name="robot_description" value="$(var robot_description)"/>
     <param name="robot_description_semantic" value="$(var robot_description_semantic)"/>
     <param name="follow_joint_trajectory_action" value="$(var follow_joint_trajectory_action)"/>
+    <!-- Home -->
+    <param name="home_state_joint_values" value="[0.0, 0.0, 1.57, 0.0, 0.0, 0.785]"/>
+    <param name="home_state_joint_names" value="['joint_1_s', 'joint_2_l', 'joint_3_u', 'joint_4_r', 'joint_5_b', 'joint_6_t']"/>
+    <param name="freespace_tree" value="go_home_main"/>
     <!-- Industrial Reconstruction parameters -->
     <param name="ir.tsdf.min.x" value="0.21"/>
     <param name="ir.tsdf.min.y" value="-0.45"/>
