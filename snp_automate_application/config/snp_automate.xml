@@ -58,11 +58,15 @@
                                          approach="{scan_approach}"
                                          process="{scan_process}"
                                          departure="{scan_departure}"/>
+          <CombineTrajectories first="{scan_approach}"
+                               second="{scan_process}"
+                               output="{scan_trajectory}"/>
+          <CombineTrajectories first="{scan_trajectory}"
+                               second="{scan_departure}"
+                               output="{scan_trajectory}"/>
           <MotionPlanPub name="Publish Scan Motion Plan"
                          topic_name="motion_plan"
-                         approach="{scan_approach}"
-                         process="{scan_process}"
-                         departure="{scan_departure}"/>
+                         trajectory="{scan_trajectory}"/>
         </Sequence>
       </Progress>
       <Progress start="20"
@@ -113,11 +117,15 @@
                                      approach="{approach}"
                                      process="{process}"
                                      departure="{departure}"/>
+          <CombineTrajectories first="{approach}"
+                               second="{process}"
+                               output="{trajectory}"/>
+          <CombineTrajectories first="{trajectory}"
+                               second="{departure}"
+                               output="{trajectory}"/>
           <MotionPlanPub name="Publish Process Motion Plan"
                          topic_name="motion_plan"
-                         approach="{approach}"
-                         process="{process}"
-                         departure="{departure}"/>
+                         trajectory="{trajectory}"/>
         </Sequence>
       </Progress>
       <Progress start="80"
@@ -180,6 +188,12 @@
                editable="true">
       <input_port name="button"/>
     </Condition>
+    <Action ID="CombineTrajectories"
+            editable="true">
+      <input_port name="first"/>
+      <input_port name="second"/>
+      <input_port name="output"/>
+    </Action>
     <Action ID="FollowJointTrajectoryAction"
             editable="true">
       <input_port name="action_name"
@@ -221,12 +235,8 @@
     <Action ID="MotionPlanPub"
             editable="true">
       <input_port name="topic_name"/>
-      <input_port name="approach"
-                  default="{approach}"/>
-      <input_port name="process"
-                  default="{process}"/>
-      <input_port name="departure"
-                  default="{departure}"/>
+      <input_port name="trajectory"
+                  default="{trajectory}"/>
     </Action>
     <Decorator ID="Progress"
                editable="true">
