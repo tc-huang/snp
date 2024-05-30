@@ -13,7 +13,7 @@
         <Action ID="CombineTrajectories" editable="true">
             <input_port name="first"/>
             <input_port name="second"/>
-            <input_port name="output"/>
+            <output_port name="output"/>
         </Action>
         <Action ID="ExecuteMotionPlanService" editable="true">
             <input_port name="service_name" default="execute_motion_plan"/>
@@ -23,6 +23,12 @@
         <Action ID="FollowJointTrajectoryAction" editable="true">
             <input_port name="action_name" default="follow_joint_trajectory"/>
             <input_port name="trajectory" default="{trajectory}"/>
+        </Action>
+        <Action ID="GenerateFreespaceMotionPlanService" editable="true">
+            <input_port name="service_name" default="generate_freespace_motion_plan"/>
+            <input_port name="start_joint_state" default="{start_joint_state}"/>
+            <input_port name="goal_joint_state" default="{goal_joint_state}"/>
+            <output_port name="trajectory" default="{trajectory}"/>
         </Action>
         <Action ID="GenerateMotionPlanService" editable="true">
             <input_port name="service_name" default="generate_motion_plan"/>
@@ -41,6 +47,10 @@
             <input_port name="service_name" default="generate_tool_paths"/>
             <input_port name="tool_paths" default="{tool_paths}"/>
         </Action>
+        <Action ID="GetCurrentJointState" editable="true">
+            <input_port name="topic_name" default="/joint_states"/>
+            <output_port name="current_state" default="{current_state}"/>
+        </Action>
         <Action ID="MotionPlanPub" editable="true">
             <input_port name="topic_name"/>
             <input_port name="trajectory" default="{trajectory}"/>
@@ -50,6 +60,10 @@
             <input_port name="start" default="0"/>
             <input_port name="end" default="100"/>
         </Decorator>
+        <Action ID="ReverseTrajectory" editable="true">
+            <input_port name="input"/>
+            <output_port name="output"/>
+        </Action>
         <Condition ID="RosSpinner" editable="true"/>
         <Control ID="SNPSequenceWithMemory" editable="true"/>
         <Decorator ID="SetPage" editable="true">
@@ -72,11 +86,16 @@
             <input_port name="service_name"/>
         </Action>
         <Action ID="UpdateTrajectoryStartState" editable="true">
-            <input_port name="topic_name" default="/joint_states"/>
-            <input_port name="input" default="{trajectory}"/>
+            <input_port name="joint_state" default="{current_state}"/>
+            <input_port name="input_trajectory" default="{trajectory}"/>
             <output_port name="output" default="{trajectory}"/>
         </Action>
         <SubTree ID="motion" editable="true">
+            <input_port name="approach" default="{approach}"/>
+            <input_port name="process" default="{process}"/>
+            <input_port name="departure" default="{departure}"/>
+        </SubTree>
+        <SubTree ID="process_pub" editable="true">
             <input_port name="approach" default="{approach}"/>
             <input_port name="process" default="{process}"/>
             <input_port name="departure" default="{departure}"/>
