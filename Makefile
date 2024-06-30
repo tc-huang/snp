@@ -28,5 +28,7 @@ launch:
 	# source install/setup.bash
 	ros2 launch snp_automate_2023 start.launch.xml sim_robot:=true sim_vision:=true
 	# ros2 launch snp_automate_2023 start.launch.xml sim_robot:=false sim_vision:=flase
-
+exp_dep:
+	vcs export --exact src > my_dependencies_exact.repos
+	vcs export --exact-with-tags src > my_dependencies_exact_with_tags.repos
 .PHONY: build clean install import launch

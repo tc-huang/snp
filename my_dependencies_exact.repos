@@ -1,0 +1,89 @@
+repositories:
+  BehaviorTree.CPP:
+    type: git
+    url: https://github.com/BehaviorTree/BehaviorTree.CPP.git
+    version: db5789eaabc49c0c12692437bb50e5b3cc26153b
+  BehaviorTree.ROS2:
+    type: git
+    url: https://github.com/marip8/BehaviorTree.ROS2.git
+    version: fd9e565591b019fc55d579577737d7879a88a4a0
+  boost_plugin_loader:
+    type: git
+    url: https://github.com/tesseract-robotics/boost_plugin_loader.git
+    version: ad31775a40fdd0786e6c5b46616dd6c5bb22208f
+  descartes_light:
+    type: git
+    url: https://github.com/swri-robotics/descartes_light.git
+    version: 377cef23f1d754dedfee19f2a72051fdf27f44bb
+  ifopt:
+    type: git
+    url: https://github.com/ethz-adrl/ifopt.git
+    version: c7f8c1e5a438b8f2f5fcea25cba11e5c3316cc19
+  industrial_core_ros2_msgs_only:
+    type: git
+    url: https://github.com/ros-industrial/industrial_core.git
+    version: d547cdcfdaf3bc0d46325215b8219b0a190c8e6c
+  industrial_reconstruction:
+    type: git
+    url: https://github.com/ros-industrial/industrial_reconstruction.git
+    version: 6e1eadada1f86b716a6fcef0ae5ffb291f9b5e66
+  motoman:
+    type: git
+    url: https://github.com/ben-greenberg/motoman.git
+    version: 565d0babe0ac751d3b933c417fcbd7f5a9b853c2
+  motoros2_fjt_pt_queue_proxy:
+    type: git
+    url: https://github.com/gavanderhoorn/motoros2_fjt_pt_queue_proxy.git
+    version: 9279969b6eec46b82fd4867ebeabfe534d653b6f
+  motoros2_interfaces:
+    type: git
+    url: https://github.com/yaskawa-global/motoros2_interfaces.git
+    version: 76505a17bd327c82cd2ddad4c3d5c0e4b561931a
+  noether:
+    type: git
+    url: https://github.com/ros-industrial/noether.git
+    version: 537151dd42076e635eb10a053371d5e9dcb4f056
+  opw_kinematics:
+    type: git
+    url: https://github.com/Jmeyer1292/opw_kinematics.git
+    version: 0faf74269d1b8c3358f65356ea45feb2046a993e
+  ros_industrial_cmake_boilerplate:
+    type: git
+    url: https://github.com/ros-industrial/ros_industrial_cmake_boilerplate.git
+    version: 4bc9a15c5959eb2d16bc7daf41a7b7109f44d60f
+  rviz_polygon_selection_tool:
+    type: git
+    url: https://github.com/swri-robotics/rviz_polygon_selection_tool.git
+    version: 6b42858ba2fce1920b29aed98553b2ebc67ae01e
+  scan_n_plan_workshop:
+    type: git
+    url: https://github.com/ros-industrial-consortium/scan_n_plan_workshop.git
+    version: 7f9d9e379628a582f32a8aba5255eb1c21b43171
+  taskflow:
+    type: git
+    url: https://github.com/taskflow/taskflow.git
+    version: f1490ffc286eba418107c4aa9b8913e8ca76443c
+  tesseract:
+    type: git
+    url: https://github.com/ros-industrial-consortium/tesseract.git
+    version: 8ca0490016d70b878b8f57fba0320a5a2bbb17b3
+  tesseract_planning:
+    type: git
+    url: https://github.com/ros-industrial-consortium/tesseract_planning.git
+    version: 788feaaac574f7a8043ef0f092c7017bc796735e
+  tesseract_qt:
+    type: git
+    url: https://github.com/tesseract-robotics/tesseract_qt.git
+    version: 2708cda1bcd36c915155018d24cfbd33cced055d
+  tesseract_ros2:
+    type: git
+    url: https://github.com/tesseract-robotics/tesseract_ros2.git
+    version: c0f80451eb4e6931de68c1a2b1f0f609cf1ec30b
+  trajectory_preview:
+    type: git
+    url: https://github.com/marip8/trajectory_preview.git
+    version: ae8b466eab2cad4c85e42efe0836fb4b864fcc77
+  trajopt:
+    type: git
+    url: https://github.com/ros-industrial-consortium/trajopt_ros.git
+    version: 806a40a7b48ac21bbee935f1f8eac3974d2385c6
